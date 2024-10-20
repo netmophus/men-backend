@@ -41,9 +41,7 @@ const app = express();
 app.use(express.json());
 
 // Configuration de CORS pour permettre les requêtes depuis localhost:3000 et localhost:3001
-app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'] // Autoriser les deux origines
-}));
+
 
 app.use(cors({
   origin: ['http://localhost:3000', 'https://men-frontend.vercel.app/'],
