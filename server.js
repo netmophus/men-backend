@@ -44,7 +44,7 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://men-frontend.vercel.app/'],
+  origin: ['https://men-frontend.vercel.app', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true // si vous utilisez des cookies ou des sessions
 }));
