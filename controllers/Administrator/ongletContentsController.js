@@ -1,4 +1,4 @@
-const OngletContent = require('../../models/administrator/OngletContentModel');
+const OngletContent = require('../../models/Administrator/OngletContentModel');
 
 
 // Récupérer les articles pour un onglet spécifique

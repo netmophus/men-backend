@@ -1,4 +1,4 @@
-const SectionArticle = require('../../models/administrator/SectionArticleModel');
+const SectionArticle = require('../../models/Administrator/SectionArticleModel');
 const fs = require('fs');
 const path = require('path');
 

@@ -1,4 +1,4 @@
-const OngletCarte = require('../../models/administrator/OngletCarteModel');
+const OngletCarte = require('../../models/Administrator/OngletCarteModel');
 //const upload = require('../../middleware/upload'); // Importer la configuration Multer
 
 // Obtenir tous les onglets des activités hebdomadaires
