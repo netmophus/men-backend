@@ -1,5 +1,5 @@
 const express = require('express');
-const { protect, authorize, authorizeRole } = require('../middleware/authMiddleware');
+const { protect, authorizeRole, authorizeRole } = require('../middleware/authMiddleware');
 const {
   createDevoirCompo,
   getDevoirCompos,

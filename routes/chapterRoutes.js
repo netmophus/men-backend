@@ -1,5 +1,5 @@
 const express = require('express');
-const { createChapter, getChapters, updateChapter, deleteChapter, getAllClasses} = require('../controllers/chapterController');
+const { createChapter, getChapters, updateChapter, deleteChapter, getAllClasses} = require('../controllers/ChapterController');
 const { protect, authorizeRole } = require('../middleware/authMiddleware');
 const router = express.Router();
 
