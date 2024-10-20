@@ -45,6 +45,12 @@ app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'] // Autoriser les deux origines
 }));
 
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://men-frontend.vercel.app/'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true // si vous utilisez des cookies ou des sessions
+}));
+
 // Définir les routes
 app.use('/api/auth', authRoutes); // Route pour l'authentification
 app.use('/api/establishment', establishmentRoutes); // Route pour les établissements
