@@ -23,7 +23,7 @@ const academicYearRoutes = require('./routes/academicYearRoutes');
 const pedagogicalResourceRoutes = require('./routes/pedagogicalResourceRoutes'); // Importer les routes pédagogiques
 const chapterRoutes = require('./routes/chapterRoutes'); 
 const statsRoutes = require ('./routes/statsRoutes');
-const pedagogicalSubjectRoutes = require('./routes/PedagogicalSubjectRoutes');
+const PedagogicalSubjectRoutes = require('./routes/PedagogicalSubjectRoutes');
 
 const inscriptionBEPCRoutes = require('./routes/bepc/inscriptionBEPCRoutes');
 const authBEPCRoutes = require('./routes/bepc/authBEPCRoutes');
@@ -95,7 +95,7 @@ app.use('/api/academic-years', academicYearRoutes);
 app.use('/api/pedagogical-resources', pedagogicalResourceRoutes);  // Route pour les ressources pédagogiques, classes et matières
 
 
-app.use('/api/pedagogical-subjects', pedagogicalSubjectRoutes);
+app.use('/api/pedagogical-subjects', PedagogicalSubjectRoutes);
 
 app.use('/api/chapters', chapterRoutes);
 
