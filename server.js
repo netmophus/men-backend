@@ -45,33 +45,25 @@ app.use(express.json());
 //   origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'] // Autoriser les deux origines
 // }));
 
-// // Configuration CORS
-// const corsOptions = {
-//   origin: process.env.NODE_ENV === 'production'
-//     ? 'https://men-frontend.vercel.app'  // URL de votre frontend déployé
-//     : 'http://localhost:3000',            // URL de votre frontend en local
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   credentials: true,
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-// };
 
-// app.use(cors(corsOptions));
+
+
 
 
 
 // Configuration CORS
 const corsOptions = {
   origin: function (origin, callback) {
+    // En production, autoriser uniquement l'origine frontend spécifique
     if (process.env.NODE_ENV === 'production') {
-      // Allow your production frontend URL
       if (origin === 'https://men-frontend.vercel.app') {
-        callback(null, true);
+        callback(null, true); // Autoriser la requête
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new Error('Not allowed by CORS')); // Bloquer la requête
       }
     } else {
-      // Allow localhost for development
-      callback(null, 'http://localhost:3000');
+      // Autoriser toutes les requêtes depuis localhost en développement
+      callback(null, true);
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -80,6 +72,14 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
+app.options('*', cors(corsOptions));
+
 
 
 // Définir les routes
