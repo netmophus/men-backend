@@ -13,17 +13,17 @@ const subjectRoutes = require('./routes/subjectRoutes'); // Importer les routes 
 const teacherRoutes = require('./routes/teacherRoutes'); // Importer les routes pour les enseignants
 const studentRoutes = require('./routes/studentRoutes');
 const bulletinRoutes = require('./routes/bulletinRoutes');
-const sectionCardsRoutes = require('./routes/Administrator/sectionCardsRoutes');
+const sectionCardsRoutes = require('./routes/administrator/sectionCardsRoutes');
 const sectionArticlesRoutes = require('./routes/Administrator/sectionArticlesRoutes');
 const ongletCartesRoutes = require('./routes/Administrator/ongletCartesRoutes'); // Importer les routes pour les onglets
-const ongletContentsRoutes = require('./routes/Administrator/ongletContentsRoutes');
+const ongletContentsRoutes = require('./routes/administrator/ongletContentsRoutes');
 // Import routes
 const devoirCompoRoutes = require('./routes/devoirCompoRoutes');
 const academicYearRoutes = require('./routes/academicYearRoutes');
 const pedagogicalResourceRoutes = require('./routes/pedagogicalResourceRoutes'); // Importer les routes pédagogiques
 const chapterRoutes = require('./routes/chapterRoutes'); 
 const statsRoutes = require ('./routes/statsRoutes');
-const PedagogicalSubjectRoutes = require('./routes/PedagogicalSubjectRoutes');
+const pedagogicalSubjectRoutes = require('./routes/PedagogicalSubjectRoutes');
 
 const inscriptionBEPCRoutes = require('./routes/bepc/inscriptionBEPCRoutes');
 const authBEPCRoutes = require('./routes/bepc/authBEPCRoutes');
@@ -41,25 +41,21 @@ const app = express();
 app.use(express.json());
 
 // Configuration de CORS pour permettre les requêtes depuis localhost:3000 et localhost:3001
-// Liste des origines autorisées
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? ['https://men-frontend.vercel.app'] // URL de votre frontend en production
-  : ['http://localhost:3000']; // URL de votre frontend en développement
+// app.use(cors({
+//   origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'] // Autoriser les deux origines
+// }));
 
 // Configuration CORS
-app.use(cors({
-  origin: function (origin, callback) {
-    // Autoriser les requêtes des origines spécifiées ou si l'origine n'est pas présente (requêtes locales)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Méthodes HTTP autorisées
-  credentials: true, // Autoriser l'envoi des cookies et autres en-têtes d'identification
-  allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
-}));
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+    ? 'https://men-frontend.vercel.app'  // URL de votre frontend déployé
+    : 'http://localhost:3000',            // URL de votre frontend en local
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 
 
 
@@ -95,7 +91,7 @@ app.use('/api/academic-years', academicYearRoutes);
 app.use('/api/pedagogical-resources', pedagogicalResourceRoutes);  // Route pour les ressources pédagogiques, classes et matières
 
 
-app.use('/api/pedagogical-subjects', PedagogicalSubjectRoutes);
+app.use('/api/pedagogical-subjects', pedagogicalSubjectRoutes);
 
 app.use('/api/chapters', chapterRoutes);
 
