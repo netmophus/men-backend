@@ -16,7 +16,7 @@ const bulletinRoutes = require('./routes/bulletinRoutes');
 const sectionCardsRoutes = require('./routes/Administrator/sectionCardsRoutes');
 const sectionArticlesRoutes = require('./routes/Administrator/sectionArticlesRoutes');
 const ongletCartesRoutes = require('./routes/Administrator/ongletCartesRoutes'); // Importer les routes pour les onglets
-const ongletContentsRoutes = require('./routes/administrator/ongletContentsRoutes');
+const ongletContentsRoutes = require('./routes/Administrator/ongletContentsRoutes');
 // Import routes
 const devoirCompoRoutes = require('./routes/devoirCompoRoutes');
 const academicYearRoutes = require('./routes/academicYearRoutes');
