@@ -51,18 +51,19 @@ app.use(express.json());
 
 
 
+
 // Configuration CORS
 const corsOptions = {
   origin: function (origin, callback) {
-    // En production, autoriser uniquement l'origine frontend spécifique
     if (process.env.NODE_ENV === 'production') {
-      if (origin === 'https://men-frontend.vercel.app') {
+      // Vérifier que l'origine correspond à celle du frontend en production
+      if (origin && origin === 'https://men-frontend.vercel.app') {
         callback(null, true); // Autoriser la requête
       } else {
         callback(new Error('Not allowed by CORS')); // Bloquer la requête
       }
     } else {
-      // Autoriser toutes les requêtes depuis localhost en développement
+      // En développement, autoriser toutes les requêtes depuis localhost
       callback(null, true);
     }
   },
@@ -73,12 +74,21 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Middleware pour ajouter l'en-tête Access-Control-Allow-Credentials de manière explicite
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Origin', 'https://men-frontend.vercel.app');
   next();
 });
 
-app.options('*', cors(corsOptions));
+// Gérer explicitement les requêtes OPTIONS (pré-vérification)
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'https://men-frontend.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(200);
+});
 
 
 
