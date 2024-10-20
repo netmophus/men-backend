@@ -48,16 +48,20 @@ const allowedOrigins = process.env.NODE_ENV === 'production'
   ? ['https://men-frontend.vercel.app'] // URL de votre frontend déployé sur Vercel
   : ['http://localhost:3000']; // URL de votre frontend en développement
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Autoriser les requêtes venant des origines spécifiées ou, si aucune origine n'est présente (par ex., requêtes locales), autoriser
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+
+
+  app.use(cors({
+    origin: function (origin, callback) {
+      // Autoriser les requêtes venant des origines spécifiées ou, si aucune origine n'est présente (par ex., requêtes locales), autoriser
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true, // Autoriser l'envoi des cookies et autres en-têtes d'identification
+  }));
+ 
 
 // Définir les routes
 app.use('/api/auth', authRoutes); // Route pour l'authentification
