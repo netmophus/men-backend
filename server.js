@@ -41,27 +41,27 @@ const app = express();
 app.use(express.json());
 
 // Configuration de CORS pour permettre les requêtes depuis localhost:3000 et localhost:3001
-
-
-// Détecter l'environnement
-const allowedOrigins = process.env.NODE_ENV === 'production' 
-  ? ['https://men-frontend.vercel.app'] // URL de votre frontend déployé sur Vercel
+// Liste des origines autorisées
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://men-frontend.vercel.app'] // URL de votre frontend en production
   : ['http://localhost:3000']; // URL de votre frontend en développement
 
+// Configuration CORS
+app.use(cors({
+  origin: function (origin, callback) {
+    // Autoriser les requêtes des origines spécifiées ou si l'origine n'est pas présente (requêtes locales)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Méthodes HTTP autorisées
+  credentials: true, // Autoriser l'envoi des cookies et autres en-têtes d'identification
+  allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
+}));
 
 
-  app.use(cors({
-    origin: function (origin, callback) {
-      // Autoriser les requêtes venant des origines spécifiées ou, si aucune origine n'est présente (par ex., requêtes locales), autoriser
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true, // Autoriser l'envoi des cookies et autres en-têtes d'identification
-  }));
- 
 
 // Définir les routes
 app.use('/api/auth', authRoutes); // Route pour l'authentification
