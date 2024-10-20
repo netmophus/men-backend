@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { protect, authorizeRole } = require('../../middleware/authMiddleware');
-const { getAllOnglets, createOnglet, updateOnglet, deleteOnglet } = require('../../controllers/administrator/ongletCartesController');
+const { getAllOnglets, createOnglet, updateOnglet, deleteOnglet } = require('../../controllers/Administrator/ongletCartesController');
 const multer = require('multer');
 const path = require('path');
 

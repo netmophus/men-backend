@@ -3,7 +3,7 @@
 
 const express = require('express');
 const { protect,  authorizeRole } = require('../../middleware/authMiddleware');
-const { createOngletContent, updateOngletContent, getOngletContents, deleteOngletContent } = require('../../controllers/administrator/ongletContentsController');
+const { createOngletContent, updateOngletContent, getOngletContents, deleteOngletContent } = require('../../controllers/Administrator/ongletContentsController');
 const uploadArticle = require('../../middleware/uploadArticle'); // Utilisation de la configuration spécifique
 
 const router = express.Router();
